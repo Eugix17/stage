@@ -23,9 +23,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/alluser")
-    public List<User> allUserList(){
-        return userService.getAllUserList();
+    @GetMapping("/getusers")
+    public List<User> getUsersList(){
+        return userService.getUsersList();
     }
 
     @GetMapping("/getuser/{id}")
@@ -33,18 +33,21 @@ public class UserController {
         return userService.getUser(id);
     }
 
-    @PostMapping(value="/postuser")
-    public void addUser(@RequestBody User user) {
+    @PostMapping(value="/createuser")
+    public String addUser(@RequestBody User user) {
         userService.addUser(user);
+        return "User is created successfully";
     }
 
     @PutMapping(value="/updateuser/{id}")
-    public void updateUser(@RequestBody User user, @PathVariable("id") String id) {
+    public String updateUser(@RequestBody User user, @PathVariable("id") String id) {
         userService.updateUser(user, id);
+        return "User is updated successfully";
     }
 
     @DeleteMapping(value="/deleteuser/{id}")
-    public void deleteUser(@PathVariable("id") String id) {
+    public String deleteUser(@PathVariable("id") String id) {
         userService.deleteUser(id);
+        return "User is deleted successfully";
     }
 }
